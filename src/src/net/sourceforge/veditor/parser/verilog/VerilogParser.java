@@ -14,26 +14,25 @@ package net.sourceforge.veditor.parser.verilog;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 
 import net.sourceforge.veditor.VerilogPlugin;
 import net.sourceforge.veditor.parser.HdlParserException;
 import net.sourceforge.veditor.parser.IParser;
 import net.sourceforge.veditor.parser.OutlineContainer;
+import net.sourceforge.veditor.parser.OutlineContainer.Collapsible;
 import net.sourceforge.veditor.parser.OutlineDatabase;
 import net.sourceforge.veditor.parser.OutlineElement;
 import net.sourceforge.veditor.parser.OutlineElementFactory;
-import net.sourceforge.veditor.parser.VariableStore;
-import net.sourceforge.veditor.parser.OutlineContainer.Collapsible;
 import net.sourceforge.veditor.parser.ParserReader;
+import net.sourceforge.veditor.parser.VariableStore;
 import net.sourceforge.veditor.preference.PreferenceStrings;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 
 /**
  * implementation class of VerilogParserCore<p/>
@@ -227,6 +226,20 @@ public class VerilogParser extends VerilogParserCore implements IParser, Prefere
 			m_OutlineContainer.endElement(name, type, end.endLine,
 					end.endColumn, m_File);
 		}
+	}
+	
+	@Override
+	protected void parameterAssignment(String name, Expression value) {
+		VariableStore.Symbol sym;
+		sym = variableStore.getVariableSymbol(name, generateBlock);
+		if (sym != null) {
+			if (value.isValidInt())
+				sym.setValue(value.intValue());
+			else
+				sym.setValue(value.toString());
+			//sym.setAssigned(ident.beginLine, ident.beginColumn);
+		}
+		
 	}
 	
 	protected void parameterAssignment(Identifier ident, Expression value) {
@@ -540,6 +553,7 @@ public class VerilogParser extends VerilogParserCore implements IParser, Prefere
 			}
 		}
 	}
+
 
 	/**
 	 * Evaluate positional port connection.
@@ -900,6 +914,8 @@ public class VerilogParser extends VerilogParserCore implements IParser, Prefere
 			return VerilogPlugin.getPreferenceBoolean(key);
 		}
 	}
+
+
 }
 
 

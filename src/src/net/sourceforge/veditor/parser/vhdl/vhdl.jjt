@@ -146,6 +146,7 @@ TOKEN [IGNORE_CASE] :
   | <EXIT:          "exit">
   | <FILE:          "file">
   | <FOR:           "for">
+  | <FORCE:         "force">
   | <FUNCTION:      "function">
   | <GENERATE:      "generate">
   | <GENERIC:       "generic">
@@ -192,6 +193,7 @@ TOKEN [IGNORE_CASE] :
   | <REGISTER:      "register">
   | <REJECT:        "reject">
   | <REM:           "rem">
+  | <RELEASE:       "release">
   | <REPORT:        "report">
   | <RETURN:        "return">
   | <ROL:           "rol">
@@ -445,7 +447,11 @@ void architecture_statement() #void :
   | LOOKAHEAD([label() ":"] [<POSTPONED>] <ASSERT>)
     concurrent_assertion_statement()
   | LOOKAHEAD([label() ":"] [<POSTPONED>] conditional_signal_assignment()|
-              [label() ":"] [<POSTPONED>] selected_signal_assignment())
+              [label() ":"] [<POSTPONED>] selected_signal_assignment()   |
+              [label() ":"] [<POSTPONED>] selected_force_assignment()    |
+              [label() ":"] [<POSTPONED>] simple_release_assignment()    |
+              [label() ":"] [<POSTPONED>] simple_force_assignment()      |
+              [label() ":"] [<POSTPONED>] conditional_force_assignment() )
     concurrent_signal_assignment_statement()
   | LOOKAHEAD(instantiation_label() ":" instantiated_unit() )
     component_instantiation_statement()
@@ -821,10 +827,15 @@ void concurrent_signal_assignment_statement() :
 {}
 {
     [ LOOKAHEAD( label() ":") label() ":" ]
-    [ <POSTPONED> ]
-    ( LOOKAHEAD(  target() "<=" options_() conditional_waveforms() ";") 
-        conditional_signal_assignment() 
-      | selected_signal_assignment() )
+    [ <POSTPONED> ]    
+     ( 
+        LOOKAHEAD(  target() "<=" <FORCE> [<IN> | <OUT>] expression() <WHEN> ) conditional_force_assignment()
+      | LOOKAHEAD(  target() "<=" <FORCE> ) simple_force_assignment()        
+      | LOOKAHEAD(  target() "<=" options_() conditional_waveforms() ";") conditional_signal_assignment()
+      | simple_release_assignment()   
+      | LOOKAHEAD( <WITH> expression() <SELECT>  target()  "<=" <FORCE> ) selected_force_assignment()
+      | selected_signal_assignment() 
+     )
 }
 
 
@@ -1977,7 +1988,8 @@ void operator_symbol() :
 void options_() :
 {}
 {
-  [ <GUARDED> ] [ delay_mechanism() ]
+  [ <GUARDED> ] 
+  [ delay_mechanism() ] 
 }
 
 
@@ -2502,6 +2514,7 @@ void sequence_of_statements() :
   ( sequential_statement() )*
 }
 
+
 void sequential_statement() #void :
 {}
 {
@@ -2513,6 +2526,10 @@ void sequential_statement() #void :
       assertion_statement()
     | LOOKAHEAD(3)
       report_statement()
+    | LOOKAHEAD(  [ label() ":" ] target() "<=" <FORCE> )
+      simple_force_assignment()
+    | LOOKAHEAD(  [ label() ":" ] target() "<=" <RELEASE> )
+      simple_release_assignment()	
     | LOOKAHEAD(  [ label() ":" ] target() "<=" )
       signal_assignment_statement()
     | LOOKAHEAD(  [ label() ":" ] target() ":=" )
@@ -2573,13 +2590,38 @@ void sign() :
   | "-"
 }
 
+void conditional_force_assignment() :
+{}
+{
+	target() "<=" <FORCE> [ <IN> | <OUT> ] conditional_waveforms() ";"
+}
+
+
+void selected_force_assignment() :
+{}
+{
+	<WITH> expression() <SELECT>
+     target()  "<=" <FORCE> [ <IN> | <OUT> ]  selected_waveforms() ";"
+}
+
+void simple_force_assignment() :
+{}
+{
+  target() "<=" <FORCE> [ <IN> | <OUT> ] expression() ";"
+}
+
+void simple_release_assignment() :
+{}
+{
+  target() "<=" <RELEASE>  [ <IN> | <OUT> ] ";" 
+}
 
 void signal_assignment_statement() :
 {}
-{
-  [ LOOKAHEAD( label() ":") label() ":" ]
-  target() "<=" [ delay_mechanism() ] waveform() ";"
-
+{ 
+ [ LOOKAHEAD( label() ":") label() ":" ] 
+     target() "<=" [ delay_mechanism() ] waveform() ";"
+  
 }
 
 
