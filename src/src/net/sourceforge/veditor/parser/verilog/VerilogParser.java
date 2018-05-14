@@ -228,7 +228,6 @@ public class VerilogParser extends VerilogParserCore implements IParser, Prefere
 		}
 	}
 	
-	@Override
 	protected void parameterAssignment(String name, Expression value) {
 		VariableStore.Symbol sym;
 		sym = variableStore.getVariableSymbol(name, generateBlock);
