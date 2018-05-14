@@ -105,97 +105,105 @@ public interface VhdlParserCoreTreeConstants
   public int JJTINSTANTIATED_UNIT = 99;
   public int JJTINSTANTIATION_LIST = 100;
   public int JJTINTERFACE_CONSTANT_DECLARATION = 101;
-  public int JJTINTERFACE_TERMINAL_DECLARATION = 102;
-  public int JJTINTERFACE_QUANTITY_DECLARATION = 103;
-  public int JJTINTERFACE_FILE_DECLARATION = 104;
-  public int JJTINTERFACE_LIST = 105;
-  public int JJTINTERFACE_SIGNAL_DECLARATION = 106;
-  public int JJTINTERFACE_VARIABLE_DECLARATION = 107;
-  public int JJTITERATION_SCHEME = 108;
-  public int JJTLITERAL = 109;
-  public int JJTLOGICAL_NAME_LIST = 110;
-  public int JJTLOOP_STATEMENT = 111;
-  public int JJTMODE = 112;
-  public int JJTNAME = 113;
-  public int JJTNATURE_ELEMENT_DECLARATION = 114;
-  public int JJTNEXT_STATEMENT = 115;
-  public int JJTNULL_STATEMENT = 116;
-  public int JJTOPERATOR_SYMBOL = 117;
-  public int JJTOPTIONS_ = 118;
-  public int JJTPACKAGE_BODY = 119;
-  public int JJTPACKAGE_BODY_DECLARATIVE_PART = 120;
-  public int JJTPACKAGE_DECLARATION = 121;
-  public int JJTPACKAGE_DECLARATIVE_PART = 122;
-  public int JJTPACKAGE_INSTANTIATION_DECLARATION = 123;
-  public int JJTPARAMETER_SPECIFICATION = 124;
-  public int JJTPHYSICAL_LITERAL = 125;
-  public int JJTPHYSICAL_TYPE_DEFINITION = 126;
-  public int JJTPORT_CLAUSE = 127;
-  public int JJTPORT_MAP_ASPECT = 128;
-  public int JJTPREFIX = 129;
-  public int JJTPROCEDURE_CALL = 130;
-  public int JJTPROCEDURE_CALL_STATEMENT = 131;
-  public int JJTPROCESS_DECLARATIVE_PART = 132;
-  public int JJTPROCESS_STATEMENT = 133;
-  public int JJTPROCESS_STATEMENT_PART = 134;
-  public int JJTQUALIFIED_EXPRESSION = 135;
-  public int JJTRANGE = 136;
-  public int JJTRECORD_NATURE_DEFINITION = 137;
-  public int JJTRECORD_TYPE_DEFINITION = 138;
-  public int JJTSHIFT_EXPRESSION = 139;
-  public int JJTREPORT_STATEMENT = 140;
-  public int JJTRETURN_STATEMENT = 141;
-  public int JJTSCALAR_NATURE_DEFINITION = 142;
-  public int JJTSECONDARY_UNIT_DECLARATION = 143;
-  public int JJTSELECTED_NAME = 144;
-  public int JJTSELECTED_SIGNAL_ASSIGNMENT = 145;
-  public int JJTSELECTED_WAVEFORMS = 146;
-  public int JJTSENSITIVITY_LIST = 147;
-  public int JJTSEQUENCE_OF_STATEMENTS = 148;
-  public int JJTSIMPLE_EXPRESSION = 149;
-  public int JJTSIGN = 150;
-  public int JJTCONDITIONAL_FORCE_ASSIGNMENT = 151;
-  public int JJTSELECTED_FORCE_ASSIGNMENT = 152;
-  public int JJTSIMPLE_FORCE_ASSIGNMENT = 153;
-  public int JJTSIMPLE_RELEASE_ASSIGNMENT = 154;
-  public int JJTSIGNAL_ASSIGNMENT_STATEMENT = 155;
-  public int JJTSIGNAL_DECLARATION = 156;
-  public int JJTSIGNAL_KIND = 157;
-  public int JJTSIGNAL_LIST = 158;
-  public int JJTSIGNATURE = 159;
-  public int JJTTERM = 160;
-  public int JJTSLICE_NAME = 161;
-  public int JJTSUBPROGRAM_BODY = 162;
-  public int JJTSUBPROGRAM_DECLARATIVE_PART = 163;
-  public int JJTSUBPROGRAM_SPECIFICATION = 164;
-  public int JJTSUBPROGRAM_STATEMENT_PART = 165;
-  public int JJTSUBTYPE_DECLARATION = 166;
-  public int JJTSUBTYPE_INDICATION = 167;
-  public int JJTFREE_QUANTITY_DECLARATION = 168;
-  public int JJTBRANCH_QUANTITY_DECLARATION = 169;
-  public int JJTSOURCE_QUANTITY_DECLARATION = 170;
-  public int JJTACROSS_ASPECT = 171;
-  public int JJTTHROUGH_ASPECT = 172;
-  public int JJTSOURCE_ASPECT = 173;
-  public int JJTTYPE_CONVERSION = 174;
-  public int JJTUNCONSTRAINED_ARRAY_DEFINITION = 175;
-  public int JJTUSE_CLAUSE = 176;
-  public int JJTVARIABLE_ASSIGNMENT_STATEMENT = 177;
-  public int JJTVARIABLE_DECLARATION = 178;
-  public int JJTWAIT_STATEMENT = 179;
-  public int JJTWAVEFORM = 180;
-  public int JJTWAVEFORM_ELEMENT = 181;
-  public int JJTSIMULTANEOUS_STATEMENT_PART = 182;
-  public int JJTSIMPLE_SIMULTANEOUS_STATEMENT = 183;
-  public int JJTSIMULTANEOUS_IF_STATEMENT = 184;
-  public int JJTSIMULTANEOUS_CASE_STATEMENT = 185;
-  public int JJTSIMULTANEOUS_ALTERNATIVE = 186;
-  public int JJTSIMULTANEOUS_PROCEDURAL_STATEMENT = 187;
-  public int JJTPROCEDURAL_DECLARATIVE_PART = 188;
-  public int JJTPROCEDURAL_STATEMENT_PART = 189;
-  public int JJTSIMULTANEOUS_NULL_STATEMENT = 190;
-  public int JJTSHARED_VARIABLE_DECLARATION = 191;
-  public int JJTERROR_SKIPTO = 192;
+  public int JJTINTERFACE_TYPE_DECLARATION = 102;
+  public int JJTINTERFACE_SUBPROGRAM_DECLARATION = 103;
+  public int JJTINTERFACE_SUBPROGRAM_SPECIFICATION = 104;
+  public int JJTINTERFACE_PROCEDURE_SPECIFICATION = 105;
+  public int JJTINTERFACE_FUNCTION_SPECIFICATION = 106;
+  public int JJTINTERFACE_SUBPROGRAM_DEFAULT = 107;
+  public int JJTINTERFACE_PACKAGE_DECLARATION = 108;
+  public int JJTINTERFACE_PACKAGE_GENERIC_MAP_ASPECT = 109;
+  public int JJTINTERFACE_TERMINAL_DECLARATION = 110;
+  public int JJTINTERFACE_QUANTITY_DECLARATION = 111;
+  public int JJTINTERFACE_FILE_DECLARATION = 112;
+  public int JJTINTERFACE_LIST = 113;
+  public int JJTINTERFACE_SIGNAL_DECLARATION = 114;
+  public int JJTINTERFACE_VARIABLE_DECLARATION = 115;
+  public int JJTITERATION_SCHEME = 116;
+  public int JJTLITERAL = 117;
+  public int JJTLOGICAL_NAME_LIST = 118;
+  public int JJTLOOP_STATEMENT = 119;
+  public int JJTMODE = 120;
+  public int JJTNAME = 121;
+  public int JJTNATURE_ELEMENT_DECLARATION = 122;
+  public int JJTNEXT_STATEMENT = 123;
+  public int JJTNULL_STATEMENT = 124;
+  public int JJTOPERATOR_SYMBOL = 125;
+  public int JJTOPTIONS_ = 126;
+  public int JJTPACKAGE_BODY = 127;
+  public int JJTPACKAGE_BODY_DECLARATIVE_PART = 128;
+  public int JJTPACKAGE_DECLARATION = 129;
+  public int JJTPACKAGE_DECLARATIVE_PART = 130;
+  public int JJTPACKAGE_INSTANTIATION_DECLARATION = 131;
+  public int JJTPARAMETER_SPECIFICATION = 132;
+  public int JJTPHYSICAL_LITERAL = 133;
+  public int JJTPHYSICAL_TYPE_DEFINITION = 134;
+  public int JJTPORT_CLAUSE = 135;
+  public int JJTPORT_MAP_ASPECT = 136;
+  public int JJTPREFIX = 137;
+  public int JJTPROCEDURE_CALL = 138;
+  public int JJTPROCEDURE_CALL_STATEMENT = 139;
+  public int JJTPROCESS_DECLARATIVE_PART = 140;
+  public int JJTPROCESS_STATEMENT = 141;
+  public int JJTPROCESS_STATEMENT_PART = 142;
+  public int JJTQUALIFIED_EXPRESSION = 143;
+  public int JJTRANGE = 144;
+  public int JJTRECORD_NATURE_DEFINITION = 145;
+  public int JJTRECORD_TYPE_DEFINITION = 146;
+  public int JJTSHIFT_EXPRESSION = 147;
+  public int JJTREPORT_STATEMENT = 148;
+  public int JJTRETURN_STATEMENT = 149;
+  public int JJTSCALAR_NATURE_DEFINITION = 150;
+  public int JJTSECONDARY_UNIT_DECLARATION = 151;
+  public int JJTSELECTED_NAME = 152;
+  public int JJTSELECTED_SIGNAL_ASSIGNMENT = 153;
+  public int JJTSELECTED_WAVEFORMS = 154;
+  public int JJTSENSITIVITY_LIST = 155;
+  public int JJTSEQUENCE_OF_STATEMENTS = 156;
+  public int JJTSIMPLE_EXPRESSION = 157;
+  public int JJTSIGN = 158;
+  public int JJTCONDITIONAL_FORCE_ASSIGNMENT = 159;
+  public int JJTSELECTED_FORCE_ASSIGNMENT = 160;
+  public int JJTSIMPLE_FORCE_ASSIGNMENT = 161;
+  public int JJTSIMPLE_RELEASE_ASSIGNMENT = 162;
+  public int JJTSIGNAL_ASSIGNMENT_STATEMENT = 163;
+  public int JJTSIGNAL_DECLARATION = 164;
+  public int JJTSIGNAL_KIND = 165;
+  public int JJTSIGNAL_LIST = 166;
+  public int JJTSIGNATURE = 167;
+  public int JJTTERM = 168;
+  public int JJTSLICE_NAME = 169;
+  public int JJTSUBPROGRAM_BODY = 170;
+  public int JJTSUBPROGRAM_DECLARATIVE_PART = 171;
+  public int JJTSUBPROGRAM_SPECIFICATION = 172;
+  public int JJTSUBPROGRAM_STATEMENT_PART = 173;
+  public int JJTSUBTYPE_DECLARATION = 174;
+  public int JJTSUBTYPE_INDICATION = 175;
+  public int JJTFREE_QUANTITY_DECLARATION = 176;
+  public int JJTBRANCH_QUANTITY_DECLARATION = 177;
+  public int JJTSOURCE_QUANTITY_DECLARATION = 178;
+  public int JJTACROSS_ASPECT = 179;
+  public int JJTTHROUGH_ASPECT = 180;
+  public int JJTSOURCE_ASPECT = 181;
+  public int JJTTYPE_CONVERSION = 182;
+  public int JJTUNCONSTRAINED_ARRAY_DEFINITION = 183;
+  public int JJTUSE_CLAUSE = 184;
+  public int JJTVARIABLE_ASSIGNMENT_STATEMENT = 185;
+  public int JJTVARIABLE_DECLARATION = 186;
+  public int JJTWAIT_STATEMENT = 187;
+  public int JJTWAVEFORM = 188;
+  public int JJTWAVEFORM_ELEMENT = 189;
+  public int JJTSIMULTANEOUS_STATEMENT_PART = 190;
+  public int JJTSIMPLE_SIMULTANEOUS_STATEMENT = 191;
+  public int JJTSIMULTANEOUS_IF_STATEMENT = 192;
+  public int JJTSIMULTANEOUS_CASE_STATEMENT = 193;
+  public int JJTSIMULTANEOUS_ALTERNATIVE = 194;
+  public int JJTSIMULTANEOUS_PROCEDURAL_STATEMENT = 195;
+  public int JJTPROCEDURAL_DECLARATIVE_PART = 196;
+  public int JJTPROCEDURAL_STATEMENT_PART = 197;
+  public int JJTSIMULTANEOUS_NULL_STATEMENT = 198;
+  public int JJTSHARED_VARIABLE_DECLARATION = 199;
+  public int JJTERROR_SKIPTO = 200;
 
 
   public String[] jjtNodeName = {
@@ -301,6 +309,14 @@ public interface VhdlParserCoreTreeConstants
     "instantiated_unit",
     "instantiation_list",
     "interface_constant_declaration",
+    "interface_type_declaration",
+    "interface_subprogram_declaration",
+    "interface_subprogram_specification",
+    "interface_procedure_specification",
+    "interface_function_specification",
+    "interface_subprogram_default",
+    "interface_package_declaration",
+    "interface_package_generic_map_aspect",
     "interface_terminal_declaration",
     "interface_quantity_declaration",
     "interface_file_declaration",
@@ -394,4 +410,4 @@ public interface VhdlParserCoreTreeConstants
     "error_skipto",
   };
 }
-/* JavaCC - OriginalChecksum=1162e23d3d7bb00ce2b64754b87ac82c (do not edit this line) */
+/* JavaCC - OriginalChecksum=53d2078774f31feaeeb425a7cf493b8b (do not edit this line) */
