@@ -72,7 +72,7 @@ public class HdlScanner extends RuleBasedScanner
 	public static final String[] vhdlWords = { "abs", "access", "across", "after",
 			"alias", "all", "and", "architecture", "array", "assert",
 			"attribute", "begin", "block", "body", "break", "buffer", "bus", "case", "context",
-			"component", "configuration", "constant", "disconnect", "downto",
+			"component", "configuration", "constant", "disconnect", "downto","default",
 			"else", "elsif", "end", "entity", "exit", "file", "for", "force",
 			"function", "generate", "generic", "group", "guarded", "if", "impure", "in",
 			"inertial", "inout", "is", "label", "library", "linkage",

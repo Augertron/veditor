@@ -142,6 +142,7 @@ TOKEN [IGNORE_CASE] :
   | <CONSTANT:      "constant">
   | <DISCONNECT:    "disconnect">
   | <DOWNTO:        "downto">
+  | <DEFAULT_T:     "default">
   | <ELSE:          "else">
   | <ELSIF:         "elsif">
   | <END:           "end">
@@ -183,6 +184,7 @@ TOKEN [IGNORE_CASE] :
   | <OTHERS:        "others">
   | <OUT:           "out">
   | <PACKAGE:       "package">
+  | <PARAMETER:     "parameter">
   | <PORT:          "port">
   | <POSTPONED:     "postponed">
   | <PROCEDURAL:    "procedural">
@@ -326,6 +328,8 @@ void actual_designator() #void :
     variable_name()
   | LOOKAHEAD(file_name())
     file_name()
+  | LOOKAHEAD(subtype_indication()) 
+    subtype_indication()
   | <OPEN>
 
   // 1076.1 extensions:
@@ -1707,13 +1711,10 @@ void interface_constant_declaration() :
     subtype_indication() [ ":=" static_expression() ]
 }
 
-/**
- * Section 4.3.2:
- */
-void interface_declaration() #void :
+void interface_object_declaration() #void :
 {}
 {
-    LOOKAHEAD(interface_constant_declaration() ) 
+	LOOKAHEAD(interface_constant_declaration() ) 
     interface_constant_declaration()
   | LOOKAHEAD(interface_signal_declaration() )
     interface_signal_declaration()
@@ -1725,6 +1726,72 @@ void interface_declaration() #void :
   /** 1076.1 extensions: */
   | interface_terminal_declaration() 
   | interface_quantity_declaration()
+}
+
+/**
+ * Section 4.3.2:
+ */
+void interface_declaration() #void :
+{}
+{
+	  interface_object_declaration()
+	| interface_type_declaration()
+    | interface_subprogram_declaration()
+    | interface_package_declaration()
+}
+
+/** Section 6.5.3 */
+void interface_type_declaration():
+{}
+{
+	<TYPE> identifier()
+}
+
+/** Section 6.5.4 **/
+void interface_subprogram_declaration():
+{}
+{
+	interface_subprogram_specification() [ <IS>  interface_subprogram_default() ]
+}
+
+void interface_subprogram_specification() :
+{}
+{
+	interface_procedure_specification() | interface_function_specification()
+}
+
+void interface_procedure_specification() :
+{}
+{
+	<PROCEDURE> designator() [ [<PARAMETER>]  "(" formal_parameter_list()  ")" ]
+}
+
+
+void interface_function_specification() :
+{}
+{
+	[<PURE> | <IMPURE>] <FUNCTION> designator() [ [<PARAMETER>]  "(" formal_parameter_list()  ")" ] <RETURN> type_mark()
+}
+
+void interface_subprogram_default() :
+{}
+{
+	subprogram_name() |  "<>"
+}
+
+/** Section 6.5.5 **/
+void interface_package_declaration():
+{}
+{
+	<PACKAGE> identifier() <IS> <NEW>  uninstantiated_package_name() interface_package_generic_map_aspect()
+}
+
+void interface_package_generic_map_aspect():
+{}
+{
+	  LOOKAHEAD(generic_map_aspect())  generic_map_aspect()
+	| LOOKAHEAD(4) <GENERIC> <MAP>  "("  "<>"  ")"
+	| LOOKAHEAD(4) <GENERIC> <MAP> "(" <DEFAULT_T> ")"
 }
 
 
@@ -3375,6 +3442,17 @@ void uninstantiated_package_name() #void :
   name()
 }
 
+void instantiated_package_name() #void :
+{}
+{
+  name()
+}
+
+void subprogram_name() #void :
+{}
+{
+  name()
+}
 
 // 1076.1 extension:
 void record_nature_simple_name() #void :
