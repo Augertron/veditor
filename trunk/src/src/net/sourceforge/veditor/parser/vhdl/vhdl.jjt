@@ -33,7 +33,9 @@
 
 options
 {
-  // DEBUG_PARSER = true;
+  //DEBUG_PARSER = true;
+  //DEBUG_TOKEN_MANAGER = true;
+  //DEBUG_LOOKAHEAD = true;
   // CHOICE_AMBIGUITY_CHECK=3;
   IGNORE_CASE=false;
   NODE_SCOPE_HOOK=true;
@@ -44,7 +46,7 @@ options
 
 
 /**
- * The parser is instanciated in the file vhdl.java
+ * The parser is instantiated in the file vhdl.java
  */
 PARSER_BEGIN(VhdlParserCore)
 
@@ -136,6 +138,7 @@ TOKEN [IGNORE_CASE] :
   | <CASE:         "case">
   | <COMPONENT:    "component">
   | <CONFIGURATION: "configuration">
+  | <CONTEXT:       "context">
   | <CONSTANT:      "constant">
   | <DISCONNECT:    "disconnect">
   | <DOWNTO:        "downto">
@@ -943,10 +946,25 @@ void constraint() #void :
   | index_constraint()
 }
 
+
+void context_declaration() :
+{}
+{
+  <CONTEXT> identifier() <IS>       
+  	context_clause()
+  <END> [ <CONTEXT> ] [ context_simple_name() ] ";"
+}
+
 void context_clause() :
 {}
 {
-  ( context_item() )*
+    ( LOOKAHEAD(3) context_item() )*
+}
+
+void context_reference() :
+{}
+{
+   <CONTEXT> selected_name() ( "," selected_name() )* ";"
 }
 
 void context_item() #void :
@@ -954,6 +972,7 @@ void context_item() #void :
 {
     library_clause()
   | use_clause()
+  | context_reference()
 }
 
 
@@ -1792,7 +1811,7 @@ void library_clause() #void :
 
 void library_unit() #void :
 {}
-{   LOOKAHEAD(<ENTITY> | <CONFIGURATION> | <PACKAGE> identifier() )
+{   LOOKAHEAD(<ENTITY> | <CONFIGURATION> | <PACKAGE> identifier() | <CONTEXT>)
     primary_unit()
   | secondary_unit()
 }
@@ -2190,6 +2209,8 @@ void primary_unit() #void :
 {
     entity_declaration()
   | configuration_declaration()
+  | LOOKAHEAD(<CONTEXT> identifier() <IS>)
+    context_declaration()
   | LOOKAHEAD(<PACKAGE> identifier() <IS> <NEW>)
     package_instantiation_declaration()
   | LOOKAHEAD(<PACKAGE> identifier())
@@ -3209,6 +3230,13 @@ void attribute_simple_name() #void :
   simple_name()
   | <RANGE>
 }
+
+void context_simple_name() #void :
+{}
+{
+  simple_name()
+}
+
 
 void component_simple_name() #void :
 {}
